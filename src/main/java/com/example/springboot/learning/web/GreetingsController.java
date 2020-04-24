@@ -1,14 +1,21 @@
 package com.example.springboot.learning.web;
 
 
+import com.example.springboot.learning.domain.Message;
+import com.example.springboot.learning.repository.MessageRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.text.MessageFormat;
 import java.util.Map;
 
 @Controller
 public class GreetingsController {
+
+    @Autowired
+    private MessageRepository messageRepository;
 
     @GetMapping("/greeting")
     public String greeting(
@@ -20,7 +27,8 @@ public class GreetingsController {
 
     @GetMapping
     public String main(Map<String, Object> model) {
-        model.put("some", "hello!!!");
+        Iterable<Message> messages = messageRepository.findAll();
+        model.put("messages", messages);
 
         return "main";
     }
