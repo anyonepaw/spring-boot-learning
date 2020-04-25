@@ -5,6 +5,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+/**
+ * Если это Entity - то должен быть конструктор без параметров!!!
+ */
 @Entity
 public class Message {
     @Id
@@ -13,7 +16,15 @@ public class Message {
 
     private String text;
     private String tag;
-    
+
+    public Message() {
+    }
+
+    public Message(String text, String tag) {
+        this.text = text;
+        this.tag = tag;
+    }
+
     public String getText() {
         return text;
     }
@@ -29,4 +40,5 @@ public class Message {
     public void setTag(String tag) {
         this.tag = tag;
     }
+
 }
